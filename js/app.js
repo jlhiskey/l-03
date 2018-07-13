@@ -1,128 +1,127 @@
 'use strict';
 
-alert('Hello!!! My name is Jason. You are about to guess who I am. Please answer all questions using Y or N or Yes or No');
+//----------Welcome Message---------------------------------------------------------------------------
 
-var score = 0;
+alert('Hello!!! My name is Jason. You are about to guess who I am.');
 console.log('Starting Score=0.', score);
 
-var answerOne = prompt('Was I born in WA?').toUpperCase();
-console.log('Was I born in WA?', answerOne);
+//----------Global Variables--------------------------------------------------------------------------
 
-if (answerOne === 'Y' || answerOne === 'YES') {
-  alert('Wrong');
-} else if (answerOne ==='N' || answerOne === 'NO') {
-  alert('Correct');
-  score++;
-} else {
-  alert('Try inputing Y/N or YES/NO');
-}
-console.log('answerOne=No', answerOne);
-console.log('Total Possible Score = 1.', score);
+var score = 0;
+var answerYes = 'Y' || 'YES';
+var answerNo = 'N' || 'NO';
+var wrongInput = ('Incorrect input detected.');
+var ynInstruct = ('Please answer all questions using Y or N or Yes or No');
+var guessnumInstruct = ('Please only use numbers in your response');
 
-var answerTwo = prompt('Am I over 30 years old?').toUpperCase();
-console.log('Am I over 30 years old?', answerTwo);
+//----------Yes No Game Function----------------------------------------------------------------------
 
-if (answerTwo === 'Y' || answerTwo === 'YES') {
-  alert('Correct');
-  score++;
-} else if (answerTwo ==='N' || answerTwo === 'NO') {
-  alert('Wrong');
-} else {
-  alert('Try inputing Y/N or YES/NO');
-}
-console.log('answerTwo=Yes', answerTwo);
-console.log('Total Possible Score = 2.', score);
+function yesnoGame(inputAnswer, correctAnswer) {
 
-var answerThree = prompt('Do I own a Ford?').toUpperCase();
-console.log('Do I own a Ford?', answerThree);
-
-if (answerThree === 'Y' || answerThree === 'YES') {
-  alert('Definentaly incorrect');
-} else if (answerThree ==='N' || answerThree === 'NO') {
-  alert('Chevy all the way!!!');
-  score++;
-} else {
-  alert('Try inputing Y/N or YES/NO');
-}
-console.log('answerThree=No', answerThree);
-console.log('Total Possible Score = 3.', score);
-
-var answerFour = prompt('Do I own a banjo?').toUpperCase();
-console.log('Do I own a banjo?', answerFour);
-
-if (answerFour === 'Y' || answerFour === 'YES') {
-  alert('Correct');
-  score++;
-} else if (answerFour ==='N' || answerFour === 'NO') {
-  alert('Wrong');
-} else {
-  alert('Try inputing Y/N or YES/NO');
-}
-console.log('answerFour=Yes', answerOne);
-console.log('Total Possible Score = 4.', score);
-
-var answerFive = prompt('Do I have any idea how to write code?').toUpperCase();
-console.log('Do I have any idea how to write code?', answerFive);
-
-if (answerFive === 'Y' || answerFive === 'YES') {
-  alert('Thanks for the compliment but I am completely lost.');
-} else if (answerFive ==='N' || answerFive === 'NO') {
-  alert('Correct I am completely lost.');
-  score++;
-} else {
-  alert('Try inputing Y/N or YES/NO');
-}
-console.log('answerFive=No', answerFive);
-console.log('Total Possible Score = 5.', score);
-
-var totAttempts = 4;
-var correctNum = 27;
-
-while(totAttempts > 0) {
-  var answerSix = prompt('Guess my favorite number. Hint: Between 0 and 30');
-  console.log('What is my favorite number', correctNum);
-  if (parseInt(answerSix) === correctNum) {
-    alert('The force is strong with this one.');
+  if (inputAnswer.toUpperCase() !== answerYes && inputAnswer.toUpperCase() !== answerNo) {
+    prompt(wrongInput);
+  }
+  if (inputAnswer.toUpperCase() === correctAnswer){
+    alert('Correct!!!');
     score++;
-    break;
-  } else if (answerSix < correctNum) {
-    totAttempts--;
-    alert('Guess Higher. You have '+ totAttempts+' guesses left');
-  } else if (answerSix > correctNum) {
-    totAttempts--;
-    alert('Guess Lower. You have '+ totAttempts+' guesses left');
+  }
+  else if (inputAnswer.toUpperCase() !== correctAnswer){
+    alert('Sorry, the correct answer was '+ correctAnswer + '.');
   }
 }
-if (totAttempts === 0) {
-  alert('Im a Toydarian, your Jedi mind tricks wont work on me');
-}
-console.log('answerSix=27', correctNum);
-console.log('Total Possible Score = 6.', score);
 
-var totalAttempts = 6;
-var correctStates = ['COLORADO', 'CALIFORNIA', 'CO', 'CA'];
-var finish = false;
+//----------Yes No Questions--------------------------------------------------------------------------
 
-for (var i = 0; i<totalAttempts+1; i++) {
-  var answerSeven = prompt('Guess a state I have lived in other than Washington. You can spell out the entire state name or use the abbreveation for the state. Hint: West of the Mississippi').toUpperCase();
-  console.log('What states have I lived in other than Washington', correctStates);
-  for(var j=0; j< correctStates.length; j++) {
-    if (correctStates[j] === answerSeven) {
-      alert('You must be a clairvoyant.');
+// -----Instructions for adding questions-----
+//var questionX = prompt('Add yes or no question '+ ynInstruct);
+//yesnoGame(questionX, "Add answerYes or answerNo here");
+
+var questionOne = prompt('Was I born in WA? '+ ynInstruct);
+yesnoGame(questionOne, answerNo);
+
+var questionTwo = prompt('Am I over 30 years old? '+ ynInstruct);
+yesnoGame(questionTwo, answerYes);
+
+var questionThree = prompt('Do I own a Ford? '+ ynInstruct);
+yesnoGame(questionThree, answerNo);
+
+var questionFour = prompt('Do I own a banjo? '+ ynInstruct);
+yesnoGame(questionFour, answerYes);
+
+var questionFive = prompt('Do I know how to code? '+ ynInstruct);
+yesnoGame(questionFive, answerNo);
+
+//----------Guess Number Game Function-----------------------------------------------------------------
+
+function guessnumGame(inputAnswer, correctNum, totAttempts) {
+
+  while(totAttempts > 0) {
+
+    if (parseInt(inputAnswer) === correctNum) {
+      alert('Correct.');
       score++;
-      finish = true;
       break;
+    } else if (inputAnswer < correctNum) {
+      totAttempts--;
+      alert('Guess Higher. You have '+ totAttempts+' guesses left');
+    } else if (inputAnswer > correctNum) {
+      totAttempts--;
+      alert('Guess Lower. You have '+ totAttempts+' guesses left');
     }
   }
-  if (finish === false) {
-    alert('Try Again. You have '+ (totalAttempts-i)+' guesses left');
-  } else break;
+  if (totAttempts === 0) {
+    alert('You Lose...');
+  }
+  console.log('Correct Number is' + correctNum, correctNum);
+  console.log('Total Possible Score = 6.', score);
 }
-if (totalAttempts === 0) {
-  alert('Sorry I was hoping you would have said Colorado or California');
+
+//----------Guess Number Questions----------------------------------------------------------------------
+
+// -----Instructions for adding questions-----
+//var questionX = prompt('Some text that will ask the user to guess a number'+ guessnumInstruct);
+//guessnumGame(questionX, number that is being guessed, number of attempts);
+
+var questionSix = prompt('What is my favorite number '+ guessnumInstruct);
+guessnumGame(questionSix, 27, 4);
+
+//----------Guess Item Game Function--------------------------------------------------------------------
+
+function guessitemGame(inputAnswer, correctItem, totalAttempts) {
+
+  var finish = false;
+  for (var i = 0; i<totalAttempts+1; i++) {
+
+    for(var j=0; j< correctItem.length; j++) {
+      if (correctItem[j] === inputAnswer) {
+        alert('Correct');
+        score++;
+        finish = true;
+        break;
+      }
+    }
+    if (finish === false) {
+      alert('Try Again. You have '+ (totalAttempts-i)+' guesses left');
+    } else break;
+  }
+  if (totalAttempts === 0) {
+    alert('Sorry I was hoping you would have said ' + correctItem);
+  }
+
+  console.log('Answer should be ' + correctItem, correctItem);
+  console.log('Total Possible Score = 7.', score);
 }
-console.log('answerSeven=California or Colorado (CA or CO', correctStates);
-console.log('Total Possible Score = 7.', score);
+
+//----------Guess Item Game Questions----------------------------------------------------------------------
+
+// -----Instructions for adding questions-----
+//var questionX = prompt('Some text that will ask the user to guess an item from an array');
+//guessitemGame(questionX, item or array of items being guessed, number of attempts);
+
+var questionSeven = prompt('Guess a state I have lived in other than Washington. You can spell out the entire state name or use the abbreveation for the state. Hint: West of the Mississippi').toUpperCase();
+guessitemGame(questionSeven, ['California','CA','Colorado', 'CO'], 6);
+
+//----------Final Score-------------------------------------------------------------------------------------
 
 if (score <= 4) {
   alert('Please try harder your score is ' + score + ' out of 7.');
