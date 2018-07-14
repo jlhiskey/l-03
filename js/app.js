@@ -90,7 +90,12 @@ guessnumGame(questionSix, 27, 4);
 function guessitemGame(inputAnswer, correctItem, totalAttempts) {
 
   var finish = false;
-  for (var i = 0; i<totalAttempts+1; i++) {
+  for (var i = 0; i<=totalAttempts; i++) {
+
+  //instead of lower for loop
+  //  if (correctItem.indexOf(inputAnswer) !== -1) {
+
+   // }
 
     for(var j=0; j< correctItem.length; j++) {
       if (correctItem[j] === inputAnswer) {
